@@ -14,7 +14,7 @@ import { MonoText } from '../components/StyledText';
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
-    header: null,
+    title: 'Activity',
   };
 
   render() {
@@ -35,9 +35,9 @@ export default class HomeScreen extends React.Component {
           </View>
 
           <View style={styles.getStartedContainer}>
-            {this._maybeRenderDevelopmentModeWarning()}
 
-            <Text style={styles.getStartedText}>Get started by opening</Text>
+
+            <Text style={styles.getStartedText}>Get Started</Text>
 
             <View
               style={[
@@ -45,12 +45,12 @@ export default class HomeScreen extends React.Component {
                 styles.homeScreenFilename,
               ]}>
               <MonoText style={styles.codeHighlightText}>
-                screens/HomeScreen.js
+
               </MonoText>
             </View>
 
             <Text style={styles.getStartedText}>
-              Change this text and your app will automatically reload.
+              Reload
             </Text>
           </View>
 
@@ -59,7 +59,7 @@ export default class HomeScreen extends React.Component {
               onPress={this._handleHelpPress}
               style={styles.helpLink}>
               <Text style={styles.helpLinkText}>
-                Help, it didn’t automatically reload!
+
               </Text>
             </TouchableOpacity>
           </View>
