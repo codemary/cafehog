@@ -19,6 +19,12 @@
     "react-navigation": "^1.0.0-beta.12"
   },
   "devDependencies": {
-    "jest-expo": "^20.0.0"
+    "eslint": "^4.7.1",
+    "eslint-config-expo": "^6.0.0",
+    "jest-expo": "^20.0.0",
+    "prettier": "^1.7.0"
+  },
+  "eslintConfig": {
+    "extends": "expo/native"
   }
 }
