@@ -8,8 +8,10 @@ import {
   FlatList,
   TouchableOpacity,
   View,
+  Button,
 } from 'react-native';
 import { WebBrowser } from 'expo';
+import { Ionicons } from '@expo/vector-icons';
 
 import { MonoText } from '../components/StyledText';
 
@@ -37,8 +39,16 @@ const styles = StyleSheet.create({
 const extractKey = ({ id }) => id
 
 export default class HomeScreen extends React.Component {
-  static navigationOptions = {
-    title: 'Activity',
+  static navigationOptions = ({ navigation }) => {
+
+    return {
+      title: 'Activity',
+      headerRight: (
+        <Ionicons
+          onPress={() => navigation.navigate('NewPost', {})}
+          name="ios-add" size={40} color="blue" style={{ paddingRight: 15 }} />
+      )
+    }
   };
 
   renderItem = ({ item }) => {
