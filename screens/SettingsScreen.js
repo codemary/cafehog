@@ -1,5 +1,4 @@
 import React from 'react';
-import { ExpoConfigView } from '@expo/samples';
 import Settings from '../components/Settings'
 
 export default class SettingsScreen extends React.Component {

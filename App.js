@@ -3,6 +3,7 @@ import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import { AppLoading, Asset, Font } from 'expo';
 import { Ionicons } from '@expo/vector-icons';
 import RootNavigation from './navigation/RootNavigation';
+import 'expo';
 
 export default class App extends React.Component {
   state = {
@@ -48,7 +49,7 @@ export default class App extends React.Component {
       // reporting service, for example Sentry
       console.warn(
         'There was an error caching assets (see: App.js), perhaps due to a ' +
-          'network timeout, so we skipped caching. Reload the app to try again.'
+        'network timeout, so we skipped caching. Reload the app to try again.'
       );
       console.log(e);
     } finally {

@@ -1,7 +1,5 @@
 import React from 'react';
-import { Text } from 'react-native';
-
-
+import NewPost from '../components/NewPost';
 
 export default class NewPostScreen extends React.Component {
   static navigationOptions = {
@@ -9,6 +7,6 @@ export default class NewPostScreen extends React.Component {
   };
 
   render() {
-    return <Text> New Post </Text>;
+    return <NewPost />;
   }
 }
