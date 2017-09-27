@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Constants } from 'expo';
 import { SearchBar } from 'react-native-elements'; // 0.17.0
+import { Container, Header, Content, ListItem, CheckBox, Text, Body } from 'native-base';
 
 
 export default class NewPost extends Component {
@@ -16,13 +17,33 @@ export default class NewPost extends Component {
   render() {
     return (
       <View style={styles.container}>
+        <Text>I wish to</Text>
+        <Content>
+          <ListItem style={styles.textStyle} >
+            <CheckBox checked={true} />
+            <Body>
+              <Text>Learn</Text>
+            </Body>
+          </ListItem>
+          <ListItem style={styles.textStyle}>
+            <CheckBox checked={false} />
+            <Body>
+              <Text>Talk about</Text>
+            </Body>
+          </ListItem>
+          <ListItem style={styles.textStyle}>
+            <CheckBox checked={false} />
+            <Body>
+              <Text>Recruit</Text>
+            </Body>
+          </ListItem>
+        </Content>
         <SearchBar
           lightTheme
           value={this.state.inputValue}
           onChangeText={this._handleTextChange}
-          style={{ width: 290, height: 44, padding: 8, border: 2, color: '#000' }}
+          style={{ width: 300, height: 44, padding: 8, color: '#000' }}
         />
-
       </View>
     );
   }
@@ -40,9 +61,14 @@ const suggestions = [
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
+    alignItems: 'flex-start',
     justifyContent: 'center',
     paddingTop: Constants.statusBarHeight,
-    backgroundColor: '#ecf0f1',
+    backgroundColor: '#ffffff',
   },
+  textStyle: {
+    width: 300,
+    height: 44,
+    padding: 8,
+  }
 });
