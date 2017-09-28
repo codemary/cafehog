@@ -17,7 +17,7 @@ export default class NewPost extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>I wish to</Text>
+        <Text style={styles.text}>I wish to</Text>
         <Content>
           <ListItem style={styles.list}>
             <CheckBox checked={true} />
@@ -67,7 +67,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffffff',
   },
   list: {
-    flex: 1,
     alignItems: 'flex-start',
     justifyContent: 'center',
     paddingTop: Constants.statusBarHeight,
@@ -76,4 +75,8 @@ const styles = StyleSheet.create({
     height: 44,
     padding: 8,
   },
+  text: {
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start',
+  }
 });
