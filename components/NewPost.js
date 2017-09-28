@@ -19,19 +19,19 @@ export default class NewPost extends Component {
       <View style={styles.container}>
         <Text>I wish to</Text>
         <Content>
-          <ListItem style={styles.textStyle} >
+          <ListItem style={styles.list}>
             <CheckBox checked={true} />
             <Body>
               <Text>Learn</Text>
             </Body>
           </ListItem>
-          <ListItem style={styles.textStyle}>
+          <ListItem style={styles.list}>
             <CheckBox checked={false} />
             <Body>
               <Text>Talk about</Text>
             </Body>
           </ListItem>
-          <ListItem style={styles.textStyle}>
+          <ListItem style={styles.list}>
             <CheckBox checked={false} />
             <Body>
               <Text>Recruit</Text>
@@ -61,14 +61,19 @@ const suggestions = [
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingTop: Constants.statusBarHeight,
+    backgroundColor: '#ecf0f1',
+  },
+  list: {
+    flex: 1,
     alignItems: 'flex-start',
     justifyContent: 'center',
     paddingTop: Constants.statusBarHeight,
     backgroundColor: '#ffffff',
-  },
-  textStyle: {
     width: 300,
     height: 44,
     padding: 8,
-  }
+  },
 });
