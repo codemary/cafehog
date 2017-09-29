@@ -8,11 +8,16 @@ import { Container, Header, Content, ListItem, CheckBox, Text, Body } from 'nati
 export default class NewPost extends Component {
   state = {
     inputValue: '',
+    checked: false,
   };
 
   _handleTextChange = inputValue => {
     this.setState({ inputValue });
   };
+
+  toggle() {
+    this.setState({ checked: !this.state.checked });
+  }
 
   render() {
     return (
@@ -20,19 +25,19 @@ export default class NewPost extends Component {
         <Text style={styles.text}>I wish to</Text>
         <Content>
           <ListItem style={styles.list}>
-            <CheckBox checked={true} />
+            <CheckBox onPress={this.toggle.bind(this)} />
             <Body>
               <Text>Learn</Text>
             </Body>
           </ListItem>
           <ListItem style={styles.list}>
-            <CheckBox checked={false} />
+            <CheckBox onPress={this.toggle.bind(this)} />
             <Body>
               <Text>Talk about</Text>
             </Body>
           </ListItem>
           <ListItem style={styles.list}>
-            <CheckBox checked={false} />
+            <CheckBox onPress={this.toggle.bind(this)} />
             <Body>
               <Text>Recruit</Text>
             </Body>
