@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, FlatList } from 'react-native';
 import { Constants } from 'expo';
 import { SearchBar } from 'react-native-elements'; // 0.17.0
 import { Container, Header, Content, ListItem, CheckBox, Text, Body } from 'native-base';
 
+const rows = [{ id: 0, text: 'Learn' }, { id: 1, text: 'Talk About' }, { id: 2, text: 'Recruit' }];
+
+const extractKey = ({ id }) => id;
 
 export default class NewPost extends Component {
   state = {
@@ -15,34 +18,36 @@ export default class NewPost extends Component {
     this.setState({ inputValue });
   };
 
-  toggle() {
+  _toggle = () => {
     this.setState({ checked: !this.state.checked });
-  }
+  };
+
+  _handleListItem = () => {
+    console.log("holla");
+  };
+
+  renderItem = ({ item }) => {
+    return (
+      <ListItem style={styles.row} onPress={this._handleListItem}>
+        <CheckBox onPress={this.toggle} />
+        <Body>
+          <Text>{item.text}</Text>
+        </Body>
+      </ListItem>
+    );
+  };
 
   render() {
     return (
       <View style={styles.container}>
         <Text style={styles.text}>I wish to</Text>
-        <Content>
-          <ListItem style={styles.list}>
-            <CheckBox onPress={this.toggle.bind(this)} />
-            <Body>
-              <Text>Learn</Text>
-            </Body>
-          </ListItem>
-          <ListItem style={styles.list}>
-            <CheckBox onPress={this.toggle.bind(this)} />
-            <Body>
-              <Text>Talk about</Text>
-            </Body>
-          </ListItem>
-          <ListItem style={styles.list}>
-            <CheckBox onPress={this.toggle.bind(this)} />
-            <Body>
-              <Text>Recruit</Text>
-            </Body>
-          </ListItem>
-        </Content>
+        <FlatList
+          style={styles.listContainer}
+          data={rows}
+          renderItem={this.renderItem}
+          keyExtractor={extractKey}
+        />
+
         <SearchBar
           lightTheme
           value={this.state.inputValue}
@@ -66,22 +71,19 @@ const suggestions = [
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
     paddingTop: Constants.statusBarHeight,
     backgroundColor: '#ffffff',
   },
-  list: {
-    alignItems: 'flex-start',
-    justifyContent: 'center',
-    paddingTop: Constants.statusBarHeight,
-    backgroundColor: '#ffffff',
-    width: 300,
-    height: 44,
-    padding: 8,
+  listContainer: {
+    marginLeft: -10,
+    marginRight: 5,
+  },
+  row: {
+    padding: 15,
+    marginBottom: 5,
   },
   text: {
     alignItems: 'flex-start',
     justifyContent: 'flex-start',
-  }
+  },
 });
