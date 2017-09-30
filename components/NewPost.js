@@ -48,21 +48,14 @@ export default class NewPost extends Component {
           keyExtractor={extractKey}
         />
         <Text style={styles.text}>Choose a topic</Text>
-        <View style={{ borderBottomColor: '#A9A9A9', borderBottomWidth: 1 }}>
-          <TextInput
-            style={{
-              height: 40,
-              borderColor: '#A9A9A9',
-              borderWidth: 1,
-              backgroundColor: '#D3D3D3',
-            }}
-            onChangeText={text => this.setState({ text })}
-            value={this.state.text}
-            placeholder=" Type here..."
-            autoCapitalize="words"
-            auto-correction
-          />
-        </View>
+        <TextInput
+          style={styles.textInput}
+          onChangeText={text => this.setState({ text })}
+          value={this.state.text}
+          placeholder=" Type here..."
+          autoCapitalize="words"
+          autoCorrect
+        />
         {/* <SearchBar
           lightTheme
           autoCorrect
@@ -109,5 +102,14 @@ const styles = StyleSheet.create({
   },
   itemText: {
     fontFamily: 'san-francisco',
+  },
+  textInput: {
+    height: 40,
+    margin: 10,
+    borderColor: '#A9A9A9',
+    borderWidth: 1,
+    backgroundColor: '#ffffff',
+    borderBottomColor: '#A9A9A9',
+    borderBottomWidth: 1,
   },
 });
