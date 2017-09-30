@@ -31,7 +31,7 @@ export default class NewPost extends Component {
       <ListItem style={styles.row} onPress={this._handleListItem}>
         <CheckBox onPress={this.toggle} />
         <Body>
-          <Text>{item.text}</Text>
+          <Text style={styles.itemText}>{item.text}</Text>
         </Body>
       </ListItem>
     );
@@ -85,5 +85,13 @@ const styles = StyleSheet.create({
   text: {
     alignItems: 'flex-start',
     justifyContent: 'flex-start',
+    marginLeft: 25,
+    marginBottom: 20,
+    fontWeight: '300',
+    fontSize: 32,
+    fontFamily: 'san-francisco',
   },
+  itemText: {
+    fontFamily: 'san-francisco',
+  }
 });
