@@ -59,6 +59,8 @@ export default class NewPost extends Component {
             onChangeText={text => this.setState({ text })}
             value={this.state.text}
             placeholder=" Type here..."
+            autoCapitalize="words"
+            auto-correction
           />
         </View>
         {/* <SearchBar
