@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, StyleSheet, FlatList } from 'react-native';
 import { Constants } from 'expo';
 import { SearchBar } from 'react-native-elements'; // 0.17.0
-import { Container, Header, Content, ListItem, CheckBox, Text, Body } from 'native-base';
+import { ListItem, CheckBox, Text, Body } from 'native-base';
 
 const rows = [{ id: 0, text: 'Learn' }, { id: 1, text: 'Talk About' }, { id: 2, text: 'Recruit' }];
 
