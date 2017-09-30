@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, FlatList } from 'react-native';
+import { View, StyleSheet, FlatList, TextInput } from 'react-native';
 import { Constants } from 'expo';
 import { SearchBar } from 'react-native-elements'; // 0.17.0
 import { ListItem, CheckBox, Text, Body } from 'native-base';
@@ -23,7 +23,7 @@ export default class NewPost extends Component {
   };
 
   _handleListItem = () => {
-    console.log("holla");
+    console.log('holla');
   };
 
   renderItem = ({ item }) => {
@@ -47,13 +47,27 @@ export default class NewPost extends Component {
           renderItem={this.renderItem}
           keyExtractor={extractKey}
         />
-
-        <SearchBar
+        <Text style={styles.text}>Choose a topic</Text>
+        <View style={{ borderBottomColor: '#A9A9A9', borderBottomWidth: 1 }}>
+          <TextInput
+            style={{
+              height: 40,
+              borderColor: '#A9A9A9',
+              borderWidth: 1,
+              backgroundColor: '#D3D3D3',
+            }}
+            onChangeText={text => this.setState({ text })}
+            value={this.state.text}
+            placeholder=" Type here..."
+          />
+        </View>
+        {/* <SearchBar
           lightTheme
+          autoCorrect
           value={this.state.inputValue}
           onChangeText={this._handleTextChange}
           style={{ width: 300, height: 44, padding: 8, color: '#000' }}
-        />
+        /> */}
       </View>
     );
   }
@@ -93,5 +107,5 @@ const styles = StyleSheet.create({
   },
   itemText: {
     fontFamily: 'san-francisco',
-  }
+  },
 });
