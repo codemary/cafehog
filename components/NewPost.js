@@ -60,6 +60,7 @@ export default class NewPost extends Component {
           placeholder=" Type here..."
           autoCapitalize="words"
           autoCorrect
+          clearButtonMode="while-editing"
         />
       </View>
     );
