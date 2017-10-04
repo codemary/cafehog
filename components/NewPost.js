@@ -3,7 +3,8 @@ import { View, StyleSheet, FlatList, TextInput } from 'react-native';
 import { Constants } from 'expo';
 import { SearchBar } from 'react-native-elements'; // 0.17.0
 import { ListItem, CheckBox, Text, Body } from 'native-base';
-import TagInput from 'react-native-tag-input';
+// import TagInput from 'react-native-tag-input';
+// import TextInput from '../components/TextInput';
 
 const rows = [{ id: 0, text: 'Learn' }, { id: 1, text: 'Talk About' }, { id: 2, text: 'Recruit' }];
 
@@ -53,15 +54,17 @@ export default class NewPost extends Component {
           keyExtractor={extractKey}
         />
         <Text style={styles.text}>Choose a topic</Text>
-        <TextInput
+        <TextInput />
+        {/* <TextInput
           style={styles.textInput}
           onChangeText={text => this.setState({ text })}
           value={this.state.text}
           placeholder=" Type here..."
           autoCapitalize="words"
-          autoCorrect
           clearButtonMode="while-editing"
-        />
+          autoCorrect
+          spellCheck
+        /> */}
       </View>
     );
   }
