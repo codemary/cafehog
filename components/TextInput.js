@@ -1,15 +1,10 @@
 import React from 'react';
 import ReactNative from 'react-native';
 
-var {
-  Text,
-  TextInput,
-  View,
-  StyleSheet,
-} = ReactNative;
+var { Text, TextInput, View, StyleSheet } = ReactNative;
 
 var WithLabel = React.createClass({
-  render: function () {
+  render() {
     return (
       <View style={styles.labelContainer}>
         <View style={styles.label}>
@@ -22,7 +17,7 @@ var WithLabel = React.createClass({
 });
 
 var TextEventsExample = React.createClass({
-  getInitialState: function () {
+  getInitialState() {
     return {
       curText: '<No Event>',
       prevText: '<No Event>',
@@ -31,8 +26,8 @@ var TextEventsExample = React.createClass({
     };
   },
 
-  updateText: function (text) {
-    this.setState((state) => {
+  updateText(text) {
+    this.setState(state => {
       return {
         curText: text,
         prevText: state.curText,
@@ -42,7 +37,7 @@ var TextEventsExample = React.createClass({
     });
   },
 
-  render: function () {
+  render() {
     return (
       <View>
         <TextInput
@@ -51,34 +46,32 @@ var TextEventsExample = React.createClass({
           autoCorrect={false}
           onFocus={() => this.updateText('onFocus')}
           onBlur={() => this.updateText('onBlur')}
-          onChange={(event) => this.updateText(
-            'onChange text: ' + event.nativeEvent.text
-          )}
-          onEndEditing={(event) => this.updateText(
-            'onEndEditing text: ' + event.nativeEvent.text
-          )}
-          onSubmitEditing={(event) => this.updateText(
-            'onSubmitEditing text: ' + event.nativeEvent.text
-          )}
-          onSelectionChange={(event) => this.updateText(
-            'onSelectionChange range: ' +
-            event.nativeEvent.selection.start + ',' +
-            event.nativeEvent.selection.end
-          )}
-          onKeyPress={(event) => {
+          onChange={event => this.updateText('onChange text: ' + event.nativeEvent.text)}
+          onEndEditing={event => this.updateText('onEndEditing text: ' + event.nativeEvent.text)}
+          onSubmitEditing={event =>
+            this.updateText('onSubmitEditing text: ' + event.nativeEvent.text)}
+          onSelectionChange={event =>
+            this.updateText(
+              'onSelectionChange range: ' +
+              event.nativeEvent.selection.start +
+              ',' +
+              event.nativeEvent.selection.end
+            )}
+          onKeyPress={event => {
             this.updateText('onKeyPress key: ' + event.nativeEvent.key);
           }}
           style={styles.default}
         />
         <Text style={styles.eventLabel}>
-          {this.state.curText}{'\n'}
+          {this.state.curText}
+          {'\n'}
           (prev: {this.state.prevText}){'\n'}
           (prev2: {this.state.prev2Text}){'\n'}
           (prev3: {this.state.prev3Text})
         </Text>
       </View>
     );
-  }
+  },
 });
 
 class AutoExpandingTextInput extends React.Component {
@@ -92,8 +85,8 @@ class AutoExpandingTextInput extends React.Component {
     return (
       <TextInput
         {...this.props}
-        multiline={true}
-        onChange={(event) => {
+        multiline
+        onChange={event => {
           this.setState({
             text: event.nativeEvent.text,
             height: event.nativeEvent.contentSize.height,
@@ -122,16 +115,14 @@ class RewriteExample extends React.Component {
         <TextInput
           multiline={false}
           maxLength={limit}
-          onChangeText={(text) => {
+          onChangeText={text => {
             text = text.replace(/ /g, '_');
             this.setState({ text });
           }}
           style={styles.default}
           value={this.state.text}
         />
-        <Text style={[styles.remainder, { color: remainderColor }]}>
-          {remainder}
-        </Text>
+        <Text style={[styles.remainder, { color: remainderColor }]}>{remainder}</Text>
       </View>
     );
   }
@@ -149,7 +140,7 @@ class RewriteExampleInvalidCharacters extends React.Component {
       <View style={styles.rewriteContainer}>
         <TextInput
           multiline={false}
-          onChangeText={(text) => {
+          onChangeText={text => {
             this.setState({ text: text.replace(/\s/g, '') });
           }}
           style={styles.default}
@@ -168,13 +159,14 @@ class TokenizedTextExample extends React.Component {
     this.state = { text: 'Hello #World' };
   }
   render() {
-
     //define delimiter
     let delimiter = /\s+/;
 
     //split string
     let _text = this.state.text;
-    let token, index, parts = [];
+    let token,
+      index,
+      parts = [];
     while (_text) {
       delimiter.lastIndex = 0;
       token = delimiter.exec(_text);
@@ -193,9 +185,13 @@ class TokenizedTextExample extends React.Component {
     parts.push(_text);
 
     //highlight hashtags
-    parts = parts.map((text) => {
+    parts = parts.map(text => {
       if (/^#/.test(text)) {
-        return <Text key={text} style={styles.hashtag}>{text}</Text>;
+        return (
+          <Text key={text} style={styles.hashtag}>
+            {text}
+          </Text>
+        );
       } else {
         return text;
       }
@@ -204,9 +200,9 @@ class TokenizedTextExample extends React.Component {
     return (
       <View>
         <TextInput
-          multiline={true}
+          multiline
           style={styles.multiline}
-          onChangeText={(text) => {
+          onChangeText={text => {
             this.setState({ text });
           }}>
           <Text>{parts}</Text>
@@ -221,7 +217,7 @@ var BlurOnSubmitExample = React.createClass({
     this.refs[nextField].focus();
   },
 
-  render: function () {
+  render() {
     return (
       <View>
         <TextInput
@@ -267,7 +263,7 @@ var BlurOnSubmitExample = React.createClass({
         />
       </View>
     );
-  }
+  },
 });
 
 var styles = StyleSheet.create({
@@ -340,79 +336,67 @@ exports.description = 'Single and multi-line text inputs.';
 exports.examples = [
   {
     title: 'Auto-focus',
-    render: function () {
+    render() {
       return (
         <TextInput
-          autoFocus={true}
+          autoFocus
           style={styles.default}
           accessibilityLabel="I am the accessibility label for text input"
         />
       );
-    }
+    },
   },
   {
     title: "Live Re-Write (<sp>  ->  '_') + maxLength",
-    render: function () {
+    render() {
       return <RewriteExample />;
-    }
+    },
   },
   {
     title: 'Live Re-Write (no spaces allowed)',
-    render: function () {
+    render() {
       return <RewriteExampleInvalidCharacters />;
-    }
+    },
   },
   {
     title: 'Auto-capitalize',
-    render: function () {
+    render() {
       return (
         <View>
           <WithLabel label="none">
-            <TextInput
-              autoCapitalize="none"
-              style={styles.default}
-            />
+            <TextInput autoCapitalize="none" style={styles.default} />
           </WithLabel>
           <WithLabel label="sentences">
-            <TextInput
-              autoCapitalize="sentences"
-              style={styles.default}
-            />
+            <TextInput autoCapitalize="sentences" style={styles.default} />
           </WithLabel>
           <WithLabel label="words">
-            <TextInput
-              autoCapitalize="words"
-              style={styles.default}
-            />
+            <TextInput autoCapitalize="words" style={styles.default} />
           </WithLabel>
           <WithLabel label="characters">
-            <TextInput
-              autoCapitalize="characters"
-              style={styles.default}
-            />
+            <TextInput autoCapitalize="characters" style={styles.default} />
           </WithLabel>
         </View>
       );
-    }
+    },
   },
   {
     title: 'Auto-correct',
-    render: function () {
+    render() {
       return (
         <View>
           <WithLabel label="true">
-            <TextInput autoCorrect={true} style={styles.default} />
+            <TextInput autoCorrect style={styles.default} />
           </WithLabel>
           <WithLabel label="false">
             <TextInput autoCorrect={false} style={styles.default} />
           </WithLabel>
         </View>
       );
-    }
+    },
   },
   {
     title: 'Keyboard types',
-    render: function () {
+    render() {
       var keyboardTypes = [
         'default',
         'ascii-capable',
@@ -427,43 +411,33 @@ exports.examples = [
         'web-search',
         'numeric',
       ];
-      var examples = keyboardTypes.map((type) => {
+      var examples = keyboardTypes.map(type => {
         return (
           <WithLabel key={type} label={type}>
-            <TextInput
-              keyboardType={type}
-              style={styles.default}
-            />
+            <TextInput keyboardType={type} style={styles.default} />
           </WithLabel>
         );
       });
       return <View>{examples}</View>;
-    }
+    },
   },
   {
     title: 'Keyboard appearance',
-    render: function () {
-      var keyboardAppearance = [
-        'default',
-        'light',
-        'dark',
-      ];
-      var examples = keyboardAppearance.map((type) => {
+    render() {
+      var keyboardAppearance = ['default', 'light', 'dark'];
+      var examples = keyboardAppearance.map(type => {
         return (
           <WithLabel key={type} label={type}>
-            <TextInput
-              keyboardAppearance={type}
-              style={styles.default}
-            />
+            <TextInput keyboardAppearance={type} style={styles.default} />
           </WithLabel>
         );
       });
       return <View>{examples}</View>;
-    }
+    },
   },
   {
     title: 'Return key types',
-    render: function () {
+    render() {
       var returnKeyTypes = [
         'default',
         'go',
@@ -477,119 +451,96 @@ exports.examples = [
         'done',
         'emergency-call',
       ];
-      var examples = returnKeyTypes.map((type) => {
+      var examples = returnKeyTypes.map(type => {
         return (
           <WithLabel key={type} label={type}>
-            <TextInput
-              returnKeyType={type}
-              style={styles.default}
-            />
+            <TextInput returnKeyType={type} style={styles.default} />
           </WithLabel>
         );
       });
       return <View>{examples}</View>;
-    }
+    },
   },
   {
     title: 'Enable return key automatically',
-    render: function () {
+    render() {
       return (
         <View>
           <WithLabel label="true">
-            <TextInput enablesReturnKeyAutomatically={true} style={styles.default} />
+            <TextInput enablesReturnKeyAutomatically style={styles.default} />
           </WithLabel>
         </View>
       );
-    }
+    },
   },
   {
     title: 'Secure text entry',
-    render: function () {
+    render() {
       return (
         <View>
           <WithLabel label="true">
-            <TextInput password={true} style={styles.default} defaultValue="abc" />
+            <TextInput password style={styles.default} defaultValue="abc" />
           </WithLabel>
         </View>
       );
-    }
+    },
   },
   {
     title: 'Event handling',
-    render: function (): ReactElement { return <TextEventsExample />; },
+    render(): ReactElement {
+      return <TextEventsExample />;
+    },
   },
   {
     title: 'Colored input text',
-    render: function () {
+    render() {
       return (
         <View>
-          <TextInput
-            style={[styles.default, { color: 'blue' }]}
-            defaultValue="Blue"
-          />
-          <TextInput
-            style={[styles.default, { color: 'green' }]}
-            defaultValue="Green"
-          />
+          <TextInput style={[styles.default, { color: 'blue' }]} defaultValue="Blue" />
+          <TextInput style={[styles.default, { color: 'green' }]} defaultValue="Green" />
         </View>
       );
-    }
+    },
   },
   {
     title: 'Colored highlight/cursor for text input',
-    render: function () {
+    render() {
       return (
         <View>
+          <TextInput style={styles.default} selectionColor={'green'} defaultValue="Highlight me" />
           <TextInput
             style={styles.default}
-            selectionColor={"green"}
-            defaultValue="Highlight me"
-          />
-          <TextInput
-            style={styles.default}
-            selectionColor={"rgba(86, 76, 205, 1)"}
+            selectionColor={'rgba(86, 76, 205, 1)'}
             defaultValue="Highlight me"
           />
         </View>
       );
-    }
+    },
   },
   {
     title: 'Clear button mode',
-    render: function () {
+    render() {
       return (
         <View>
           <WithLabel label="never">
-            <TextInput
-              style={styles.default}
-              clearButtonMode="never"
-            />
+            <TextInput style={styles.default} clearButtonMode="never" />
           </WithLabel>
           <WithLabel label="while editing">
-            <TextInput
-              style={styles.default}
-              clearButtonMode="while-editing"
-            />
+            <TextInput style={styles.default} clearButtonMode="while-editing" />
           </WithLabel>
           <WithLabel label="unless editing">
-            <TextInput
-              style={styles.default}
-              clearButtonMode="unless-editing"
-            />
+            <TextInput style={styles.default} clearButtonMode="unless-editing" />
           </WithLabel>
           <WithLabel label="always">
-            <TextInput
-              style={styles.default}
-              clearButtonMode="always"
-            />
+            <TextInput style={styles.default} clearButtonMode="always" />
           </WithLabel>
         </View>
       );
-    }
+    },
   },
   {
     title: 'Clear and select',
-    render: function () {
+    render() {
       return (
         <View>
           <WithLabel label="clearTextOnFocus">
@@ -597,7 +548,7 @@ exports.examples = [
               placeholder="text is cleared on focus"
               defaultValue="text is cleared on focus"
               style={styles.default}
-              clearTextOnFocus={true}
+              clearTextOnFocus
             />
           </WithLabel>
           <WithLabel label="selectTextOnFocus">
@@ -605,49 +556,47 @@ exports.examples = [
               placeholder="text is selected on focus"
               defaultValue="text is selected on focus"
               style={styles.default}
-              selectTextOnFocus={true}
+              selectTextOnFocus
             />
           </WithLabel>
         </View>
       );
-    }
+    },
   },
   {
     title: 'Blur on submit',
-    render: function (): ReactElement { return <BlurOnSubmitExample />; },
+    render(): ReactElement {
+      return <BlurOnSubmitExample />;
+    },
   },
   {
     title: 'Multiline blur on submit',
-    render: function () {
+    render() {
       return (
         <View>
           <TextInput
             style={styles.multiline}
             placeholder="blurOnSubmit = true"
             returnKeyType="next"
-            blurOnSubmit={true}
-            multiline={true}
+            blurOnSubmit
+            multiline
             onSubmitEditing={event => alert(event.nativeEvent.text)}
           />
         </View>
       );
-    }
+    },
   },
   {
     title: 'Multiline',
-    render: function () {
+    render() {
       return (
         <View>
-          <TextInput
-            placeholder="multiline text input"
-            multiline={true}
-            style={styles.multiline}
-          />
+          <TextInput placeholder="multiline text input" multiline={true} style={styles.multiline} />
           <TextInput
             placeholder="multiline text input with font styles and placeholder"
-            multiline={true}
-            clearTextOnFocus={true}
-            autoCorrect={true}
+            multiline
+            clearTextOnFocus
+            autoCorrect
             autoCapitalize="words"
             placeholderTextColor="red"
             keyboardType="url"
@@ -656,39 +605,39 @@ exports.examples = [
           <TextInput
             placeholder="uneditable multiline text input"
             editable={false}
-            multiline={true}
+            multiline
             style={styles.multiline}
           />
           <TextInput
             placeholder="multiline with children"
-            multiline={true}
-            enablesReturnKeyAutomatically={true}
+            multiline
+            enablesReturnKeyAutomatically
             returnKeyType="go"
             style={styles.multiline}>
             <View style={styles.multilineChild} />
           </TextInput>
         </View>
       );
-    }
+    },
   },
   {
     title: 'Auto-expanding',
-    render: function () {
+    render() {
       return (
         <View>
           <AutoExpandingTextInput
             placeholder="height increases with content"
-            enablesReturnKeyAutomatically={true}
+            enablesReturnKeyAutomatically
             returnKeyType="default"
           />
         </View>
       );
-    }
+    },
   },
   {
     title: 'Attributed text',
-    render: function () {
+    render() {
       return <TokenizedTextExample />;
-    }
+    },
   },
 ];

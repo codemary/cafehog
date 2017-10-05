@@ -54,8 +54,8 @@ export default class NewPost extends Component {
           keyExtractor={extractKey}
         />
         <Text style={styles.text}>Choose a topic</Text>
-        <TextInput />
-        {/* <TextInput
+        {/* <TextInput /> */}
+        <TextInput
           style={styles.textInput}
           onChangeText={text => this.setState({ text })}
           value={this.state.text}
@@ -64,7 +64,7 @@ export default class NewPost extends Component {
           clearButtonMode="while-editing"
           autoCorrect
           spellCheck
-        /> */}
+        />
       </View>
     );
   }
