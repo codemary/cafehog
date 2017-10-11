@@ -2,17 +2,25 @@ import { Notifications } from 'expo';
 import React from 'react';
 import { StackNavigator } from 'react-navigation';
 
-import MainTabNavigator from './MainTabNavigator';
-import NewPostScreen from '../screens/NewPostScreen';
+import MeetupCategory from './MeetupCategory';
+import MeetupTopics from './MeetupTopics';
+import MeetupCafe from './MeetupCafe';
+import MeetupTreats from './MeetupTreats';
 import registerForPushNotificationsAsync from '../api/registerForPushNotificationsAsync';
 
 const RootStackNavigator = StackNavigator(
   {
-    Main: {
-      screen: MainTabNavigator,
+    MeetupCategory: {
+      screen: MeetupCategory,
     },
-    NewPost: {
-      screen: NewPostScreen,
+    MeetupTopics: {
+      screen: MeetupTopics,
+    },
+    MeetupCafe: {
+      screen: MeetupCafe,
+    },
+    MeetupTreats: {
+      screen: MeetupTreats,
     },
   },
   {
